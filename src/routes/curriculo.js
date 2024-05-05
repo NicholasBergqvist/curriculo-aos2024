@@ -1,30 +1,34 @@
 import { Router } from "express";
 const router = Router();
 
-router.get("/curriculos", async (req, res) => {
+router.get("/", async (req, res) => {
   const curriculos = await req.context.models.Curriculo.findAll();
   return res.send(curriculos);
 });
-router.get("/:curriculoId", async (req, res) => {
-  const curriculo = await req.context.models.Curriculo.findByPk(
-    req.params.curriculoId
+router.get("/:id", async (req, res) => {
+  const curriculoId = await req.context.models.Curriculo.findByPk(
+    req.params.id
   );
-  return res.send(curriculo);
+  return res.send(curriculoId);
 });
 
 router.post("/", async (req, res) => {
   const novoCurriculo = await req.context.models.Curriculo.create({
-    text: req.body.text,
+    nome: req.body.nome,
+    graduacao: req.body.graduacao,
+    sobre: req.body.sobre,
+    habilidades: req.body.habilidades,
+    especializacoes: req.body.especializacoes,
   });
 
   return res.send(novoCurriculo);
 });
-router.delete('/:curriculoId', async (req, res) => {
-    const result = await req.context.models.Curriculo.destroy({
-      where: { id: req.params.curriculoId },
-    });
-  
-    return res.send(true);
+router.delete("/:id", async (req, res) => {
+  const result = await req.context.models.Curriculo.destroy({
+    where: { curriculoId: req.params.id },
   });
+
+  return res.send(true);
+});
 
 export default router;

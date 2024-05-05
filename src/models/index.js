@@ -1,25 +1,21 @@
-import Sequelize from 'sequelize';
-import curriculoModel from './curriculo';
+import Sequelize from "sequelize";
+import curriculoModel from "./curriculo";
 
-const sequelize = new Sequelize(
-    process.env.DATABASE,
-    process.env.DATABASE_USER,
-    process.env.DATABASE_PASSWORD,
-    {
-      dialect: 'postgres',
-    },
-  );
-  
-  const models = {
-    Curriculo: curriculoModel(sequelize, Sequelize),
-  };
-  
-  Object.keys(models).forEach((key) => {
-    if ('associate' in models[key]) {
-      models[key].associate(models);
-    }
-  });
-  
-  export { sequelize };
+const sequelize = new Sequelize(process.env.DATABASE, {
+  host: process.env.DATABASE_HOST,
+  dialect: "postgres",
+});
 
-  export default models;
+const models = {
+  Curriculo: curriculoModel(sequelize, Sequelize),
+};
+
+Object.keys(models).forEach((key) => {
+  if ("associate" in models[key]) {
+    models[key].associate(models);
+  }
+});
+
+export { sequelize };
+
+export default models;
