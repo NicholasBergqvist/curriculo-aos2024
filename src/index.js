@@ -14,11 +14,10 @@ app.use((req, res, next) => {
   };
   next();
 });
-
-app.use("/", routes);
+app.use("/", routes.curriculo);
 
 sequelize.sync().then(() => {
-  app.listen(3000, () => {
+  app.listen(5432, () => {
     console.log("App com Express funcionando");
   });
 });

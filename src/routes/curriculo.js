@@ -1,18 +1,20 @@
 import { Router } from "express";
 const router = Router();
-
-router.get("/", async (req, res) => {
+router.get("/", (req, res) => {
+  res.send("API REST de currículos. Use /curriculos para operações");
+});
+router.get("/curriculos", async (req, res) => {
   const curriculos = await req.context.models.Curriculo.findAll();
   return res.send(curriculos);
 });
-router.get("/:id", async (req, res) => {
+router.get("/curriculos/:id", async (req, res) => {
   const curriculoId = await req.context.models.Curriculo.findByPk(
     req.params.id
   );
   return res.send(curriculoId);
 });
 
-router.post("/", async (req, res) => {
+router.post("/curriculos", async (req, res) => {
   const novoCurriculo = await req.context.models.Curriculo.create({
     nome: req.body.nome,
     graduacao: req.body.graduacao,
@@ -23,7 +25,7 @@ router.post("/", async (req, res) => {
 
   return res.send(novoCurriculo);
 });
-router.delete("/:id", async (req, res) => {
+router.delete("/curriculos:id", async (req, res) => {
   const result = await req.context.models.Curriculo.destroy({
     where: { curriculoId: req.params.id },
   });
