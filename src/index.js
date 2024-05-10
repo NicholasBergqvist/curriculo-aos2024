@@ -15,10 +15,10 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use("/curriculos", routes.curriculo);
+app.use("/", routes);
 
 sequelize.sync().then(() => {
-  app.listen(process.env.PORT, () => {
-    console.log(`Example app listening on port ${process.env.PORT}!`);
+  app.listen(3000, () => {
+    console.log("App com Express funcionando");
   });
 });
