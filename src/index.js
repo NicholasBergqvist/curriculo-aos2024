@@ -17,7 +17,7 @@ app.use((req, res, next) => {
 app.use("/", routes.curriculo);
 
 sequelize.sync().then(() => {
-  app.listen(5432, () => {
+  app.listen(3000, () => {
     console.log("App com Express funcionando");
   });
 });
